@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to opinion</title>
+    <link rel="stylesheet" th:href="@{CSS/main.css}">
+
+</head>
+    <body>
+    <h1>Don't block but Blog </h1>
+
+
+
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th th:text="#{col_post}"></th>-->
+<!--            <th th:text="#{col_blog}" ></th>-->
+<!--            <th></th>-->
+
+<!--        </tr>-->
+<!--        </thead>-->
+
+<!--        <tbody>-->
+
+        <div class="blogpost" th:each="blog : ${alleBlogs}">
+            <p th:text="${blog.post}"></p>
+            <p th:text="${blog.tekstarea}"></p>
+            <div>
+                <a class="btn" th:href="@{~/delete/{id}(id = ${blog.id})}" th:text="#{delete}"></a>
+            </div>
+        </div>
+<!--        </tbody>-->
+
+    <div class="rondform">
+        <form th:action="@{~/index}" method="post" th:object="${nieuweBlog}">
+            <div>
+                <label for="post" th:text="#{col_post}"></label>
+                <input type="text" th:field="*{post}" id="post">
+                <span th:if="${#fields.hasErrors('post')}" th:errors="*{post}" class="error"></span>
+            </div>
+
+            <div>
+                <label for="tekstarea"th:text="#{col_blog}"></label>
+                <input type="text" th:field="*{tekstarea}" id="tekstarea">
+                <span th:if="${#fields.hasErrors('tekstarea')}" th:errors="*{tekstarea}" class="error"></span>
+            </div>
+
+            <div>
+                <input th:value="#{submit}" type="submit">
+            </div>
+
+        </form>
+    </div>
+
+    </body>
+
+</html>
